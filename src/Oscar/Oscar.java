@@ -9,18 +9,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class Oscar {
 
     public static void main(String[] args) throws IOException {
-        List<Actors> ActorsList = readLines(Paths.get("Arquivo1.csv"));
-        List<Actors> ActressList = readLines(Paths.get("Arquivo2.csv"));
+        List<Actors> actorsList = readLines(Paths.get("Arquivo1.csv"));
+        List<Actors> actressList = readLines(Paths.get("Arquivo2.csv"));
 
-        List<Actors> allActorList = new ArrayList<>(ActorsList.size() + ActressList.size());
-        allActorList.addAll(ActorsList);
-        allActorList.addAll(ActressList);
+        List<Actors> allActorList = new ArrayList<>(actorsList.size() + actressList.size());
+        allActorList.addAll(actorsList);
+        allActorList.addAll(actressList);
+
+        System.out.println(youngActor(actorsList));
 
 
 
@@ -43,10 +46,11 @@ public class Oscar {
     }
 
 
-        public static String youngActor (){
-
-
-
+        public static String youngActor (List<Actors> actorsList){
+        //qual ator mais novo a ganhar um oscar?
+           return actorsList.stream()
+                    .min(Comparator.comparing(a -> a.getAge()))
+                    .get().getName();
         };
 }
 
